@@ -1,0 +1,379 @@
+{
+	"info": {
+		"_postman_id": "6d34dc11-edd0-4518-ba4a-637cb872c689",
+		"name": "Team02_LMS_USER_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42925569",
+		"_collection_link": "https://lively-meadow-587913.postman.co/workspace/Team-02-Request-RockStars~4fb76516-e265-4f94-8686-bd3145b47574/collection/42925569-6d34dc11-edd0-4518-ba4a-637cb872c689?action=share&source=collection_link&creator=42925569"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"token\", jsonData.token);\r",
+									"pm.environment.set(\"user_id\", jsonData.userId);\r",
+									"\r",
+									"pm.test(\"status code is 200\",() => {\r",
+									"pm.response.to.have.status(200);\r",
+									"}\r",
+									")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"userLoginEmailId\": \"{{userLoginEmailId}}\",\r\n\"password\": \"{{password}}\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}login",
+							"host": [
+								"{{base_url}}login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Batch",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Class",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Program",
+			"item": [
+				{
+					"name": "POST Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"if(pm.response.code == ('201')){\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    var TestCaseId = pm.iterationData.get('TestCase_ID')\r",
+									"    if(TestCaseId == ('P_POST_TC_01')){\r",
+									"        pm.environment.set(\"program1_id\", jsonData.programId);\r",
+									"    }\r",
+									"    else if(TestCaseId == ('P_POST_TC_02')){\r",
+									"        pm.environment.set(\"Programname\",jsonData.programName);\r",
+									"    }\r",
+									"    else if(TestCaseId == ('P_POST_TC_03')){\r",
+									"        pm.environment.set(\"program2_id\", jsonData.programId);\r",
+									"    }\r",
+									"\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var TestCaseID = pm.iterationData.get(\"TestCase_ID\");\r",
+									"if (TestCaseID.startsWith('P_')) { // Only program related test cases\r",
+									"\r",
+									"    // If the test case is not related to Program POST, we will skip the execution\r",
+									"    if (!TestCaseID.startsWith('P_POST')) {\r",
+									"        pm.execution.skipRequest();\r",
+									"    }\r",
+									"\r",
+									"    if (TestCaseID != 'P_POST_TC_04') { // Do not set token for test case 04, as it is No Auth validation case\r",
+									"        pm.request.headers.add('Bearer ' + pm.environment.get('token'), 'Authorization')\r",
+									"    }\r",
+									"    \r",
+									"}\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"programDescription\": \"{{ProgramDescription}}\",\r\n    \"programName\": \"{{ProgramName}}\",\r\n    \"programStatus\": \"{{ProgramStatus}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}",
+							"host": [
+								"{{base_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Request",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var TestCaseID = pm.iterationData.get(\"TestCase_ID\");\r",
+									"\r",
+									"if (TestCaseID.startsWith('P_')) { // Only program related test cases\r",
+									"\r",
+									"    // If the test case is not related to Program GET, we will skip the execution\r",
+									"    if (!TestCaseID.startsWith('P_GET')) {\r",
+									"        pm.execution.skipRequest();\r",
+									"    }\r",
+									"\r",
+									"    if(TestCaseID == 'P_GET_TC_09' || TestCaseID == 'P_GET_TC_13'|| TestCaseID == 'P_GET_TC_18') { //for invalid method name\r",
+									"        pm.request.method = 'POST'\r",
+									"    }\r",
+									"\r",
+									"    if(TestCaseID == 'P_GET_TC_15'|| TestCaseID == 'P_GET_TC_17'|| TestCaseID == 'P_GET_TC_18') {\r",
+									"        pm.request.url = pm.environment.get('base_url') + pm.iterationData.get('Endpoint') + \"/\" + pm.environment.get(\"program2_id\");\r",
+									"    }\r",
+									"\r",
+									"    // Do not set token for test cases, as it is No Auth validation case\r",
+									"    if (TestCaseID != 'P_GET_TC_10'|| TestCaseID !='P_GET_TC_14'|| TestCaseID == 'P_GET_TC_17') { \r",
+									"        pm.request.headers.add('Bearer ' + pm.environment.get('token'), 'Authorization')\r",
+									"    }\r",
+									"   \r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}",
+							"host": [
+								"{{base_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Request",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var TestCaseID = pm.iterationData.get(\"TestCase_ID\");\r",
+									"\r",
+									"if (TestCaseID.startsWith('P_')) { // Only program related test cases\r",
+									"\r",
+									"    // If the test case is not related to Program GET, we will skip the execution\r",
+									"    if (!TestCaseID.startsWith('P_PUT')) {\r",
+									"        pm.execution.skipRequest();\r",
+									"    }\r",
+									"     if(TestCaseID == 'P_GET_TC_19') { // Valid endpoint\r",
+									"        pm.request.url = pm.environment.get('base_url') + pm.iterationData.get('Endpoint') + \"/\" + pm.environment.get(\"Programname\");\r",
+									"    }\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"programDescription\": \"{{ProgramDescription}}\",\r\n    \"programName\": \"{{ProgramName}}\",\r\n    \"programStatus\": \"{{ProgramStatus}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}",
+							"host": [
+								"{{base_url}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"var TestCaseID = pm.iterationData.get(\"TestCase_ID\");\r",
+							"\r",
+							"// If the test case is not related to Program, we will skip the execution\r",
+							"if (!TestCaseID.startsWith('P_')) {\r",
+							"    pm.execution.skipRequest();\r",
+							"}\r",
+							"\r",
+							"// Set the url using base url and endpoint from excel\r",
+							"if (TestCaseID.startsWith('P_')) {\r",
+							"    pm.request.url = pm.environment.get('base_url') + pm.iterationData.get('Endpoint');\r",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"console.log(\"Completed test case:\" + pm.iterationData.get('TestCase_ID'));\r",
+							"\r",
+							"var statusline = pm.iterationData.get('expectedstatusline');\r",
+							"pm.test(\"expectedstatusline\" + pm.response.status, ()=>{\r",
+							"    pm.response.to.have.status(statusline);\r",
+							"})\r",
+							"\r",
+							"var expectedStatusCode = pm.iterationData.get('Response_Status_Code');\r",
+							"pm.test(\"status code is \" + pm.response.status,() => {\r",
+							"    pm.response.to.have.status(expectedStatusCode);\r",
+							"});\r",
+							"\r",
+							"pm.response.statusline"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"console.log(\"Completed test case:\" + pm.iterationData.get('TestCase_ID'));"
+				]
+			}
+		}
+	]
+}
