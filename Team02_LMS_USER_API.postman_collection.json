@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "6d34dc11-edd0-4518-ba4a-637cb872c689",
-		"name": "Team02_LMS_USER_API",
+		"_postman_id": "36132bde-5af5-4684-ad82-f2bfd74765e0",
+		"name": "LMS_USER_API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "42925569",
-		"_collection_link": "https://lively-meadow-587913.postman.co/workspace/Team-02-Request-RockStars~4fb76516-e265-4f94-8686-bd3145b47574/collection/42925569-6d34dc11-edd0-4518-ba4a-637cb872c689?action=share&source=collection_link&creator=42925569"
+		"_exporter_id": "42935366",
+		"_collection_link": "https://lively-meadow-587913.postman.co/workspace/Team-02-Request-RockStars~4fb76516-e265-4f94-8686-bd3145b47574/collection/42935366-36132bde-5af5-4684-ad82-f2bfd74765e0?action=share&source=collection_link&creator=42935366"
 	},
 	"item": [
 		{
@@ -33,7 +33,14 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
@@ -61,18 +68,465 @@
 			"name": "Batch",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "Batch_Post",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var TestCaseID = pm.iterationData.get(\"TestCase_ID\");",
+									"if (TestCaseID.startsWith('B_')) { // Only program related test cases",
+									"",
+									"    // If the test case is not related to Program POST, we will skip the execution",
+									"    if (!TestCaseID.startsWith('B_POST')) {",
+									"        pm.execution.skipRequest();",
+									"    }",
+									"",
+									"    if (TestCaseID != 'B_POST_TC_64') { // Do not set token for test case 64, as it is No Auth validation case",
+									"        pm.request.headers.add('Bearer ' + pm.environment.get('token'), 'Authorization')",
+									"    }",
+									"    ",
+									"}",
+									"if (TestCaseID == 'B_POST_TC_63')",
+									"{",
+									"    pm.request.method='DELETE'",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code == ('201')){",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    var TestCaseId = pm.iterationData.get('TestCase_ID')",
+									"    if(TestCaseId == ('B_POST_TC_40')){",
+									"        pm.environment.set(\"Batch1_id\", jsonData.batchId);",
+									"    }",
+									"    else if(TestCaseId == ('B_POST_TC_40')){",
+									"        pm.environment.set(\"BatchName1\",jsonData.batchName);",
+									"    }",
+									"",
+									"else if(TestCaseId == ('B_POST_TC_41')){",
+									"        pm.environment.set(\"Batch2_id\",jsonData.batchId);",
+									"    }",
+									"    else if(TestCaseId == ('B_POST_TC_41')){",
+									"        pm.environment.set(\"BatchName2\",jsonData.batchName);",
+									"    }",
+									"}",
+									"",
+									"pm.test(\"Status Code matches expected\", function () {",
+									"    pm.response.to.have.status(parseInt(pm.iterationData.get(\"Response_Status_Code\")));",
+									"});",
+									"pm.test(\"Status line is correct\", function () {",
+									"    pm.expect(pm.response.status).to.eql(pm.iterationData.get(\"expectedstatusline\"));",
+									"});",
+									"",
+									"pm.test(\"Validate Response Format Based on Status Code\", function () {",
+									"    let statusCode = pm.response.code;",
+									"",
+									"    if (statusCode === 201) { // Created",
+									"        pm.test(\"Response should be in JSON format for 201\", function () {",
+									"            pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"            pm.response.json(); // Ensures response is valid JSON",
+									"        });",
+									"    } ",
+									"    else if (statusCode === 400) { // Bad Request",
+									"        pm.test(\"Response should be in JSON format for 400\", function () {",
+									"            pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"            pm.response.json(); // Ensures response is valid JSON",
+									"        });",
+									"    } ",
+									"    else if (statusCode === 405) { // Method Not Allowed",
+									"        pm.test(\"Response should be in JSON format for 405\", function () {",
+									"            pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"            pm.response.json(); // Ensures response is valid JSON",
+									"        });",
+									"    } ",
+									"    else if (statusCode === 401) { // Unauthorized",
+									"        pm.test(\"Response should be in JSON format for 401\", function () {   ",
+									"            pm.expect(pm.response.headers.get(\"Content-Length\")).to.equal(\"0\");",
+									"        });",
+									"    } ",
+									"    ",
+									"    else if (statusCode === 404) { // Not Found",
+									"         pm.test(\"Response should be in Plain Text format for 404\", function () {",
+									"             pm.response.to.have.header(\"Content-Type\", \"text/plain;charset=UTF-8\");",
+									"             pm.response.text();",
+									"         });",
+									"       ",
+									"    } ",
+									"    else {",
+									"        pm.test(\"Unexpected status code: \" + statusCode, function () {",
+									"            pm.expect(false).to.be.true; // Forces failure if status is unexpected",
+									"        });",
+									"    }",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
-						"method": "GET",
-						"header": []
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"batchDescription\":\n\"{{batchDescription}}\",\n\"batchName\": \"{{batchName}}\",\n\"batchNoOfClasses\": {{batchNoOfClasses}},\n\"batchStatus\": \"{{batchStatus}}\",\n\"programId\": {{programId}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{Endpoint}}",
+							"host": [
+								"{{base_url}}{{Endpoint}}"
+							]
+						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Class",
-			"item": [
+				},
+				{
+					"name": "Batch_GetRequests",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Response time is less than 1000 ms\",()=>{",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+									" });",
+									" ",
+									"pm.test(\"Status Code matches expected\", function () {",
+									"    pm.response.to.have.status(parseInt(pm.iterationData.get(\"Response_Status_Code\")));",
+									"});",
+									"pm.test(\"Status line is correct\", function () {",
+									"    pm.expect(pm.response.status).to.eql(pm.iterationData.get(\"expectedstatusline\"));",
+									"});",
+									"pm.test(\"Validate Response Format Based on Status Code\", function () {",
+									"    let statusCode = pm.response.code;",
+									"",
+									"    if (statusCode === 200) { // Created",
+									"        pm.test(\"Response should be in JSON format for 200\", function () {",
+									"            pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"            pm.response.json(); // Ensures response is valid JSON",
+									"        });",
+									"    } ",
+									"    else if (statusCode === 400) { // Bad Request",
+									"        pm.test(\"Response should be in JSON format for 400\", function () {",
+									"            pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"            pm.response.json(); // Ensures response is valid JSON",
+									"        });",
+									"    } ",
+									"    else if (statusCode === 405) { // Method Not Allowed",
+									"        pm.test(\"Response should be in JSON format for 405\", function () {",
+									"            pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"            pm.response.json(); // Ensures response is valid JSON",
+									"        });",
+									"    } ",
+									"    else if (statusCode === 401) { // Unauthorized",
+									"        pm.test(\"Response should be in JSON format for 401\", function () {   ",
+									"         pm.expect(pm.response.headers.get(\"Content-Length\")).to.equal(\"0\");",
+									"        console.log(\"Response Body:\", pm.response.text());",
+									"        });",
+									"    } ",
+									"    ",
+									"    else if (statusCode === 404) { // Not Found",
+									"         pm.test(\"Response should be in Plain Text format for 404\", function () {",
+									"            ",
+									"            console.log(\"Response Body:\", pm.response.text());",
+									"         });",
+									"       ",
+									"    } ",
+									"    else {",
+									"        pm.test(\"Unexpected status code: \" + statusCode, function () {",
+									"            pm.expect(false).to.be.true; // Forces failure if status is unexpected",
+									"        });",
+									"    }",
+									"});",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									" //var TestCaseID = pm.iterationData.get(\"TestCase_ID\");",
+									" var TestCaseID = pm.iterationData.get(\"TestCase_ID\");",
+									"if (TestCaseID.startsWith('B_')) { // Only program related test cases",
+									"",
+									"//  If the test case is not related to Batch, we will skip the execution",
+									"if (!TestCaseID.startsWith('B_GET')) {",
+									"    pm.execution.skipRequest();",
+									"}",
+									"",
+									"if (TestCaseID == 'B_GET_TC_12' || TestCaseID == 'B_GET_TC_20' ||  TestCaseID == 'B_GET_TC_28' )",
+									"{",
+									"    pm.request.method='POST'",
+									"}",
+									"if (TestCaseID == 'B_GET_TC_04')",
+									"{",
+									"    pm.request.method='DELETE'",
+									"}",
+									"",
+									" //Do not set token for test cases, as it is No Auth validation case",
+									"    if (TestCaseID != 'B_GET_TC_05'&& TestCaseID !='B_GET_TC_13'&& TestCaseID != 'B_GET_TC_21' && TestCaseID != 'B_GET_TC_29') { ",
+									"        pm.request.headers.add('Bearer ' + pm.environment.get('token'), 'Authorization')",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{Endpoint}}",
+							"host": [
+								"{{base_url}}{{Endpoint}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Batch_PUT",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var TestCaseID = pm.iterationData.get(\"TestCase_ID\");",
+									"if (TestCaseID.startsWith('B_')) { // Only program related test cases",
+									"",
+									"    // If the test case is not related to Program POST, we will skip the execution",
+									"    if (!TestCaseID.startsWith('B_PUT')) {",
+									"        pm.execution.skipRequest();",
+									"    }",
+									"",
+									"    if (TestCaseID != 'B_PUT_TC_91') { // Do not set token for test case 91, as it is No Auth validation case",
+									"        pm.request.headers.add('Bearer ' + pm.environment.get('token'), 'Authorization')",
+									"    }",
+									"    ",
+									"}",
+									"if (TestCaseID == 'B_PUT_TC_90')",
+									"{",
+									"    pm.request.method='POST'",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"    var TestCaseId = pm.iterationData.get('TestCase_ID')",
+									"    if(TestCaseId == ('B_PUT_TC_67')){",
+									"        pm.environment.set(\"PutBatch_id\", jsonData.batchId);",
+									"    }",
+									"   ",
+									"pm.test(\"Status Code matches expected\", function () {",
+									"    pm.response.to.have.status(parseInt(pm.iterationData.get(\"Response_Status_Code\")));",
+									"});",
+									"pm.test(\"Status line is correct\", function () {",
+									"    pm.expect(pm.response.status).to.eql(pm.iterationData.get(\"expectedstatusline\"));",
+									"});",
+									"",
+									"pm.test(\"Validate Response Format Based on Status Code\", function () {",
+									"    let statusCode = pm.response.code;",
+									"",
+									"    if (statusCode === 200) { // Created",
+									"        pm.test(\"Response should be in JSON format for 201\", function () {",
+									"            pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"            pm.response.json(); // Ensures response is valid JSON",
+									"        });",
+									"    } ",
+									"    else if (statusCode === 401) { // Unauthorized",
+									"        pm.test(\"Response should be in JSON format for 401\", function () {   ",
+									"            pm.expect(pm.response.headers.get(\"Content-Length\")).to.equal(\"0\");",
+									"        });",
+									"    } ",
+									"    else if (statusCode === 400) { // Bad Request",
+									"        pm.test(\"Response should be in JSON format for 400\", function () {",
+									"            pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"            pm.response.json(); // Ensures response is valid JSON",
+									"        });",
+									"    } ",
+									"    else if (statusCode === 405) { // Method Not Allowed",
+									"        pm.test(\"Response should be in JSON format for 405\", function () {",
+									"            pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"            pm.response.json(); // Ensures response is valid JSON",
+									"        });",
+									"    } ",
+									"    ",
+									"    else if (statusCode === 404) { // Not Found",
+									"         pm.test(\"Response should be in Plain Text format for 404\", function () {",
+									"             pm.response.to.have.header(\"Content-Type\", \"text/plain;charset=UTF-8\");",
+									"             pm.response.text();",
+									"         });",
+									"       ",
+									"    } ",
+									"    else {",
+									"        pm.test(\"Unexpected status code: \" + statusCode, function () {",
+									"            pm.expect(false).to.be.true; // Forces failure if status is unexpected",
+									"        });",
+									"    }",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"batchDescription\": \"{{batchDescription}}\",\n\"batchId\": \"{{batchId}}\",\n\"batchName\": \"{{batchName}}\",\n\"batchNoOfClasses\": {{batchNoOfClasses}},\n\"batchStatus\": \"{{batchStatus}}\",\n\"programId\": {{programId}},\n\"programName\": \"{{programName}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}{{Endpoint}}{{Batch2_id}}",
+							"host": [
+								"{{base_url}}{{Endpoint}}{{Batch2_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Batch_Delete",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var TestCaseID = pm.iterationData.get(\"TestCase_ID\");",
+									"if (TestCaseID.startsWith('B_')) { // Only program related test cases",
+									"",
+									"    // If the test case is not related to Program POST, we will skip the execution",
+									"    if (!TestCaseID.startsWith('B_DEL')) {",
+									"        pm.execution.skipRequest();",
+									"    }",
+									"",
+									"    if (TestCaseID != 'B_DEL_TC_37') { // Do not set token for test case 37, as it is No Auth validation case",
+									"        pm.request.headers.add('Bearer ' + pm.environment.get('token'), 'Authorization')",
+									"    }",
+									"    ",
+									"}",
+									"if (TestCaseID == 'B_DEL_TC_36')",
+									"{",
+									"    pm.request.method='POST'",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status Code matches expected\", function () {",
+									"    pm.response.to.have.status(parseInt(pm.iterationData.get(\"Response_Status_Code\")));",
+									"});",
+									"pm.test(\"Status line is correct\", function () {",
+									"    pm.expect(pm.response.status).to.eql(pm.iterationData.get(\"expectedstatusline\"));",
+									"});",
+									"",
+									"pm.test(\"Validate Response Format Based on Status Code\", function () {",
+									"    let statusCode = pm.response.code;",
+									"   ",
+									"    if (statusCode === 200) { ",
+									"        pm.test(\"Response should be in JSON format for 200\", function () {",
+									"            pm.response.to.have.header(\"Content-Type\", \"application/json\");          ",
+									"             pm.response.text();// Ensures response is valid JSON",
+									"            ",
+									"        });",
+									"    } ",
+									"    else if (statusCode === 401) { // Unauthorized",
+									"        pm.test(\"Response should be in JSON format for 401\", function () {   ",
+									"            pm.expect(pm.response.headers.get(\"Content-Length\")).to.equal(\"0\");",
+									"        });",
+									"    } ",
+									"    else if (statusCode === 405) { // Method Not Allowed",
+									"        pm.test(\"Response should be in JSON format for 405\", function () {",
+									"            pm.response.to.have.header(\"Content-Type\", \"application/json\");",
+									"            pm.response.json(); // Ensures response is valid JSON",
+									"        });",
+									"    } ",
+									"    ",
+									"    else if (statusCode === 404) { // Not Found",
+									"         pm.test(\"Response should be in json format for 404\", function () {",
+									"            //  pm.response.to.have.header(\"Content-Type\", \"text/plain;charset=UTF-8\");",
+									"            //  pm.response.text();",
+									"            console.log(\"Response Body:\", pm.response.text());",
+									"         });",
+									"       ",
+									"    } ",
+									"    else {",
+									"        pm.test(\"Unexpected status code: \" + statusCode, function () {",
+									"            pm.expect(false).to.be.true; // Forces failure if status is unexpected",
+									"        });",
+									"    }",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}{{Endpoint}}{{PutBatch_id}}",
+							"host": [
+								"{{base_url}}{{Endpoint}}{{PutBatch_id}}"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "New Request",
 					"request": {
@@ -120,8 +574,6 @@
 							"script": {
 								"exec": [
 									"var TestCaseID = pm.iterationData.get(\"TestCase_ID\");\r",
-									"if (TestCaseID.startsWith('P_')) { // Only program related test cases\r",
-									"\r",
 									"    // If the test case is not related to Program POST, we will skip the execution\r",
 									"    if (!TestCaseID.startsWith('P_POST')) {\r",
 									"        pm.execution.skipRequest();\r",
@@ -130,9 +582,6 @@
 									"    if (TestCaseID != 'P_POST_TC_04') { // Do not set token for test case 04, as it is No Auth validation case\r",
 									"        pm.request.headers.add('Bearer ' + pm.environment.get('token'), 'Authorization')\r",
 									"    }\r",
-									"    \r",
-									"}\r",
-									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -173,8 +622,6 @@
 								"exec": [
 									"var TestCaseID = pm.iterationData.get(\"TestCase_ID\");\r",
 									"\r",
-									"if (TestCaseID.startsWith('P_')) { // Only program related test cases\r",
-									"\r",
 									"    // If the test case is not related to Program GET, we will skip the execution\r",
 									"    if (!TestCaseID.startsWith('P_GET')) {\r",
 									"        pm.execution.skipRequest();\r",
@@ -184,16 +631,15 @@
 									"        pm.request.method = 'POST'\r",
 									"    }\r",
 									"\r",
-									"    if(TestCaseID == 'P_GET_TC_15'|| TestCaseID == 'P_GET_TC_17'|| TestCaseID == 'P_GET_TC_18') {\r",
+									"    if(TestCaseID == 'P_GET_TC_15' || TestCaseID == 'P_GET_TC_17'|| TestCaseID == 'P_GET_TC_18') {\r",
 									"        pm.request.url = pm.environment.get('base_url') + pm.iterationData.get('Endpoint') + \"/\" + pm.environment.get(\"program2_id\");\r",
 									"    }\r",
 									"\r",
 									"    // Do not set token for test cases, as it is No Auth validation case\r",
-									"    if (TestCaseID != 'P_GET_TC_10'|| TestCaseID !='P_GET_TC_14'|| TestCaseID == 'P_GET_TC_17') { \r",
+									"    if (TestCaseID != 'P_GET_TC_10'&& TestCaseID !='P_GET_TC_14' && TestCaseID != 'P_GET_TC_17') { \r",
 									"        pm.request.headers.add('Bearer ' + pm.environment.get('token'), 'Authorization')\r",
 									"    }\r",
-									"   \r",
-									"}"
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -246,16 +692,28 @@
 								"exec": [
 									"var TestCaseID = pm.iterationData.get(\"TestCase_ID\");\r",
 									"\r",
-									"if (TestCaseID.startsWith('P_')) { // Only program related test cases\r",
-									"\r",
-									"    // If the test case is not related to Program GET, we will skip the execution\r",
+									"    // If the test case is not related to Program PUT, we will skip the execution\r",
 									"    if (!TestCaseID.startsWith('P_PUT')) {\r",
 									"        pm.execution.skipRequest();\r",
 									"    }\r",
-									"     if(TestCaseID == 'P_GET_TC_19') { // Valid endpoint\r",
+									"    if(TestCaseID == 'P_PUT_TC_21') {\r",
+									"        pm.execution.skipRequest();\r",
+									"    }\r",
+									"     if(TestCaseID == 'P_PUT_TC_25') {\r",
+									"        pm.execution.skipRequest();\r",
+									"    }\r",
+									"     if(TestCaseID == 'P_PUT_TC_19') { // Valid endpoint program name\r",
 									"        pm.request.url = pm.environment.get('base_url') + pm.iterationData.get('Endpoint') + \"/\" + pm.environment.get(\"Programname\");\r",
 									"    }\r",
-									"}"
+									"    // Do not set token for test cases, as it is No Auth validation case\r",
+									"    if (TestCaseID != 'P_PUT_TC_22' && TestCaseID != 'P_PUT_TC_26' ) { \r",
+									"        pm.request.headers.add('Bearer ' + pm.environment.get('token'), 'Authorization')\r",
+									"    }\r",
+									"    if(TestCaseID == 'P_PUT_TC_23') { // valid endpoint program ID\r",
+									"         pm.request.url = pm.environment.get('base_url') + pm.iterationData.get('Endpoint') + \"/\" + pm.environment.get(\"program2_id\");\r",
+									"    }\r",
+									"    \r",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -274,14 +732,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "PUT",
 						"header": [],
@@ -294,6 +745,108 @@
 								}
 							}
 						},
+						"url": {
+							"raw": "{{base_url}}",
+							"host": [
+								"{{base_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT empty body",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var TestCaseID = pm.iterationData.get(\"TestCase_ID\");\r",
+									"\r",
+									"    if(TestCaseID == 'P_PUT_TC_21') { // Valid endpoint\r",
+									"        pm.request.url = pm.environment.get('base_url') + pm.iterationData.get('Endpoint') + \"/\" + pm.environment.get(\"Programname\");\r",
+									"    }\r",
+									"    else if(TestCaseID == 'P_PUT_TC_25' ) { // valid endpoint\r",
+									"        pm.request.url = pm.environment.get('base_url') + pm.iterationData.get('Endpoint') + \"/\" + pm.environment.get(\"program2_id\");\r",
+									"    }\r",
+									"    else {\r",
+									"        pm.execution.skipRequest();\r",
+									"    }\r",
+									"    console.log(\"Setting auth token\");\r",
+									"    pm.request.headers.add('Bearer ' + pm.environment.get('token'), 'Authorization');\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}",
+							"host": [
+								"{{base_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Request",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var TestCaseID = pm.iterationData.get(\"TestCase_ID\");\r",
+									"\r",
+									"    // If the test case is not related to Program Delete, we will skip the execution\r",
+									"    if (!TestCaseID.startsWith('P_DEL')) {\r",
+									"        pm.execution.skipRequest();\r",
+									"    }\r",
+									"    if(TestCaseID == 'P_DEL_TC_28' || TestCaseID == 'P_DEL_TC_29') { // Valid endpoint program ID\r",
+									"        pm.request.url = pm.environment.get('base_url') + pm.iterationData.get('Endpoint') + \"/\" + pm.environment.get(\"program2_id\");\r",
+									"    }\r",
+									"     // Do not set token for test cases, as it is No Auth validation case\r",
+									"    if (TestCaseID != 'P_DEL_TC_28' && TestCaseID != 'P_DEL_TC_31' ) { \r",
+									"        pm.request.headers.add('Bearer ' + pm.environment.get('token'), 'Authorization')\r",
+									"    }"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
 						"url": {
 							"raw": "{{base_url}}",
 							"host": [
@@ -343,9 +896,25 @@
 							"    pm.response.to.have.status(expectedStatusCode);\r",
 							"});\r",
 							"\r",
-							"pm.response.statusline"
+							""
 						]
 					}
+				}
+			]
+		},
+		{
+			"name": "Class",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
 				}
 			]
 		},
