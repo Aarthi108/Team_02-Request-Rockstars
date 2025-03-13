@@ -1,139 +1,179 @@
-TestCase_ID,request_type,request_name,Endpoint,userId,roleId,userRoleStatus,userFirstName,userLastName,userLocation,userMiddleName,userPhoneNumber,userLinkedinUrl,userEduPg,userEduUg,userTimeZone,userVisaStatus,loginStatus,userLoginEmail,userComments,ProgramDescription,ProgramName,ProgramStatus,batchDescription,batchId,batchName,batchNoOfClasses,batchStatus,programId,programName,Comment,Response_Status_Code,expectedstatusline
-U_POST_TC_01,POST,Create users with Role Id,users/roleStatus,U279,R01,Active,Alice,Brown,PA,Moore,#ERROR!,https://www.linkedin.com/feed/?Alic,BE,ME,EST,H1B,Active,alice.bron@gmail.com,Student,,,,,,,,,,,,201,Created
-U_POST_TC_02,POST,Create users with Role Id,users/roleStatus,U280,R02,Active,Bob,Green,WA,Doe,#ERROR!,https://www.linkedin.com/feed/?BO,BSC,MSC,PST,H4-EAD,Active,bob.gren@gmail.com,Student,,,,,,,,,,,,201,Created
-U_POST_TC_03,POST,Create users with Role Id,users/roleStatus,U281,R03,Active,Oscar,Wright,TN,Miller,#ERROR!,https://www.linkedin.com/feed/?wright,BED,MED,CST,GC-EAD,Active,oscar.wriht@gmail.com,Student,,,,,,,,,,,,201,Created
-U_POST_TC_04,POST,Create users with Role Id,users/roleStatus,U282,R01,Active,Eve,Anderson,LA,Doe,#ERROR!,https://www.linkedin.com/feed/?Eve,BSC,MSC,IST,H4,Active,eve.andeson@gmail.com,Student,,,,,,,,,,,,,
-U_GET_TC_05,GET,Get All users,users,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-U_GET_TC_06,GET,Get All users,users,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-U_GET_TC_07,GET,All active users,/users/activeUsers,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-U_GET_TC_08,GET,Emails of all users with active status,/fetch-emails,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-U_GET_TC_09,GET,All Roles,/roles,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-U_GET_TC_10,GET,User information by UserId,/users/{userId},,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-U_GET_TC_11,GET,All Users with roles,/users/roles,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-U_GET_TC_12,GET,count of active and inactive users,/users/byStatus,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-U_GET_TC_13,GET,User by Program Batches,/users/programBatch/{batchId},,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-U_GET_TC_14,GET,users for programId,users/programs/16916,,,,,,,,,,,,,,,,,,,,,,,,,16916,,,200,OK
-U_GET_TC_15,GET,users for programId,users/programs/16970,,,,,,,,,,,,,,,,,,,,,,,,,16970,,,404,Not Found
-U_GET_TC_16,GET,users for programId,users/programs/16971,,,,,,,,,,,,,,,,,,,,,,,,,16971,,,404,Not Found
-U_GET_TC_17,GET,users for programId,users/programs/16916,,,,,,,,,,,,,,,,,,,,,,,,,16916,,,401,Unauthorized
-U_GET_TC_18,GET,users for roleId,users/roles/R01,,R01,,,,,,,,,,,,,,,,,,,,,,,,,,,
-U_GET_TC_19,GET,users for roleId,users/roles/R04,,R04,,,,,,,,,,,,,,,,,,,,,,,,,,,
-U_GET_TC_20,GET,users for roleId,users/roles/R03,,R01,,,,,,,,,,,,,,,,,,,,,,,,,,,
-U_GET_TC_21,GET,users for roleId V2,v2/users,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-U_TC_17,PUT,update user,users/U281,,,,,,CA,,,,,,,,,,,,,,,,,,,,,,,
-U_TC_18,PUT,update user roleId,users/roleId/U282,,R02,,,,,,,,,,,,,,,,,,,,,,,,,,,
-U_TC_19,PUT,Update User Role Program Batch Status,users/roleProgramBatchStatus/{},,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-U_TC_20,PUT,Update User Login Status,users/userLogin/{userId},,,,,,,,,,,,,,inactive,,,,,,,,,,,,,,,
-U_TC_21,DELETE,Delete User,users/{userID},,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-P_POST_TC_01,POST,Add New Program,saveprogram,,,,,,,,,,,,,,,,,Program added,Test-Program-Javam,active,,,,,,,,StoreProgramID,201,Created
-P_POST_TC_02,POST,Add New Program,saveprogram,,,,,,,,,,,,,,,,,Program added,Test-Program-Pythonm,active,,,,,,,,StoreProgramName,201,Created
-P_POST_TC_03,POST,Add New Program,saveprogram,,,,,,,,,,,,,,,,,Program added,Test-Program-Seleniumm,active,,,,,,,,StoreProgramID,201,Created
-P_POST_TC_04,POST,Add New Program with No auth,saveprogram,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-P_POST_TC_05,POST,Add New Program with invalid url,saveprogramm,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-P_POST_TC_06,POST,Add New Program with existing program name,saveprogram,,,,,,,,,,,,,,,,,Program exists,Test-Program-Pythonm,active,,,,,,,,,400,Bad Request
-P_GET_TC_07,GET,Get all programs,allPrograms,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
-P_GET_TC_08,GET,Get all programs invalid endpoint,allProgramsss,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-P_GET_TC_09,GET,Get all programs with invalid method name,allPrograms,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
-P_GET_TC_10,GET,Get all programs with no Auth,allPrograms,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-P_GET_TC_11,GET,Get all programs with users,allProgramsWithUsers,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
-P_GET_TC_12,GET,Get all programs with users Invalid endpoint,allProgramsWithUsersss,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-P_GET_TC_13,GET,Get all programs with users Invalid Method,allProgramsWithUsers,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
-P_GET_TC_14,GET,Get all programs with users No Auth,allProgramsWithUsers,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-P_GET_TC_15,GET,Get program by valid program ID,programs,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
-P_GET_TC_16,GET,Get program by Invalid program ID,programs/99999999,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-P_GET_TC_17,GET,Get program with No Auth,programs,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-P_GET_TC_18,GET,Get Program by invalid Method name,programs,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
-P_PUT_TC_19,PUT,Update program by valid program name,program,,,,,,,,,,,,,,,,,Program updated,Test-Program-Pythonmm,active,,,,,,,,StoreProgramName,200,OK
-P_PUT_TC_20,PUT,Update program by invalid program name,program/asdfkljksihdfk,,,,,,,,,,,,,,,,,,Test-Program-Pythonmm,active,,,,,,,,StoreProgramName,404,Not Found
-P_PUT_TC_21,PUT,Update program with empty body,program,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-P_PUT_TC_22,PUT,Update program with no auth,program,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-P_PUT_TC_23,PUT,Update program by Program ID,putprogram,,,,,,,,,,,,,,,,,,Test-Program-Seleniummm,Active,,,,,,,,,200,OK
-P_PUT_TC_24,PUT,Update program by invalid endpoint,putprogram/99999999,,,,,,,,,,,,,,,,,,Test-Program-Seleniummm,Active,,,,,,,,,404,Not Found
-P_PUT_TC_25,PUT,Update program with empty body,putprogram,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-P_PUT_TC_26,PUT,Update program with no auth,putprogram,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-P_DEL_TC_27,DELETE,Delete program by Invalid program ID,deletebyprogid/9999999,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-P_DEL_TC_28,DELETE,Delete Program with no auth,deletebyprogid,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-P_DEL_TC_29,DELETE,Delete program with valid program ID,deletebyprogid,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
-P_DEL_TC_30,DELETE,Delete program by Invalid program name,deletebyprogname/Agghtaslkfjasd,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-P_DEL_TC_31,DELETE,Delete Program with no auth,deletebyprogname/Test-Program-Pythonmm,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-P_DEL_TC_32,DELETE,Delete program with valid program name,deletebyprogname/Test-Program-Pythonmm,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
-B_POST_TC_40,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing,,APITestingsJAVA26,4,Active,16916,,,201,Created
-B_POST_TC_41,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing02,,APITestingsPython27,4,Active,16916,,,201,Created
-B_POST_TC_42,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,2345,,APITestings03,4,Active,16916,,,400,Bad Request
-B_POST_TC_43,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,#$@,,APITestings03,4,Active,16916,,,400,Bad Request
-B_POST_TC_44,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,APITesting36,4,Active,16916,,,201,Created
-B_POST_TC_45,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,243,4,Active,16916,,,400,Bad Request
-B_POST_TC_46,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,#$%,4,Active,16916,,,400,Bad Request
-B_POST_TC_47,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,,4,Active,16916,,,400,Bad Request
-B_POST_TC_48,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting01,4,Active,16916,,,400,Bad Request
-B_POST_TC_49,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,,Active,16916,,,400,Bad Request
-B_POST_TC_50,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,df,Active,16916,,,400,Bad Request
-B_POST_TC_51,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,$%,Active,16916,,,400,Bad Request
-B_POST_TC_52,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,78,16916,,,400,Bad Request
-B_POST_TC_53,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,DFR,16916,,,400,Bad Request
-B_POST_TC_54,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,DF56,16916,,,400,Bad Request
-B_POST_TC_55,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,$%,16916,,,400,Bad Request
-B_POST_TC_56,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,,16916,,,400,Bad Request
-B_POST_TC_57,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,Active,,,,400,Bad Request
-B_POST_TC_58,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,Active,GHT,,,400,Bad Request
-B_POST_TC_59,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,Active,&*,,,400,Bad Request
-B_POST_TC_60,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,Active,-16916,,,400,Bad Request
-B_POST_TC_61,POST,Create batch ID,batch,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,Active,16916,,,404,Not Found
-B_POST_TC_62,POST,Create batch ID,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,Active,16916,,,404,Not Found
-B_POST_TC_63,GET,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,Active,16916,,,405,Method Not Allowed
-B_POST_TC_64,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting08,4,Active,16916,,,401,Unauthorized
-B_GET_TC_01,GET,Get All Batches,batches,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
-B_GET_TC_02,GET,Get All Batches,batch,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-B_GET_TC_03,GET,Get All Batches,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-B_GET_TC_04,POST,Get All Batches,batches,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
-B_GET_TC_05,GET,Get All Batches,batches,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-B_GET_TC_08,GET,Get By Batch ID,batches/batchId/9829,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
-B_GET_TC_09,GET,Get By Batch ID,batches/batchId/94,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-B_GET_TC_10,GET,Get By Batch ID,batches/batchId/,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-B_GET_TC_11,GET,Get By Batch ID,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-B_GET_TC_12,POST,Get By Batch ID,batches/batchId/9829,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
-B_GET_TC_13,GET,Get By Batch ID,batches/batchId/9829,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-B_GET_TC_16,GET,Get Bt Batch Name,batches/batchName/Javacourse,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
-B_GET_TC_17,GET,Get Bt Batch Name,batches/batchName/Java,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-B_GET_TC_18,GET,Get Bt Batch Name,batches/batchName/,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-B_GET_TC_19,GET,Get Bt Batch Name,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-B_GET_TC_20,POST,Get Bt Batch Name,batches/batchName/Javacourse,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
-B_GET_TC_21,GET,Get Bt Batch Name,batches/batchName/Javacourse,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-B_GET_TC_24,GET,Get By Program ID,batches/program/16916,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
-B_GET_TC_25,GET,Get By Program ID,batches/program/16,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-B_GET_TC_26,GET,Get By Program ID,batches/program/,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-B_GET_TC_27,GET,Get By Program ID,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-B_GET_TC_28,DELETE,Get By Program ID,batches/program/16916,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
-B_GET_TC_29,GET,Get By Program ID,batches/program/16916,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-B_PUT_TC_67,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacoursejava05,5,Active,16916,APINinjashnoqdqwyne,,200,OK
-B_PUT_TC_68,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,Javacoursetester12,5,Active,16916,APINinjashnoqdqwyne,,200,OK
-B_PUT_TC_69,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,675,9499,Javacourse7,5,Active,16916,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_70,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,&%$,9499,Javacourse7,5,Active,16916,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_71,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,9499,JavacourseTesting05,5,Active,16916,APINinjashnoqdqwyne,,200,OK
-B_PUT_TC_72,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,453,5,Active,16916,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_73,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,#$%,5,Active,16916,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_74,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,,5,Active,16916,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_75,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacourse11,5,Active,16916,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_76,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacourse7,,Active,16916,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_77,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacourse7,TH,Active,16916,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_78,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacourse7,&^,Active,16916,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_79,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacourse7,6,678,16916,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_80,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacourse7,6,DFT,16916,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_81,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacourse7,6,DR45,16916,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_82,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacourse7,6,^%$,16916,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_83,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacourse7,6,,16916,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_84,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacourse7,6,Active,,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_85,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacourse7,6,Active,ght,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_86,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacourse7,6,Active,&^%,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_87,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacourse7,6,Active,-16916,APINinjashnoqdqwyne,,400,Bad Request
-B_PUT_TC_88,PUT,Update Batch,batches/batchId,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacourse16,5,Active,16916,APINinjashnoqdqwyne,,404,Not Found
-B_PUT_TC_89,PUT,Update Batch,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacourse7,5,Active,16916,APINinjashnoqdqwyne,,404,Not Found
-B_PUT_TC_90,POST,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacourse7,5,Active,16916,APINinjashnoqdqwyne,,405,Method Not Allowed
-B_PUT_TC_91,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,9499,Javacourse12,5,Active,16916,APINinjashnoqdqwyne,,401,Unauthorized
-B_DEL_TC_32,DELETE,Delete Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
-B_DEL_TC_33,DELETE,Delete Batch,batches/9494,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-B_DEL_TC_34,DELETE,Delete Batch,batches/bachId/,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-B_DEL_TC_35,DELETE,Delete Batch,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-B_DEL_TC_36,POST,Delete Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
-B_DEL_TC_37,DELETE,Delete Batch,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-B_DEL_TC_38,DELETE,Delete Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+TestCase_ID,request_type,request_name,Endpoint,userId,roleId,userRoleStatus,userFirstName,userLastName,userLocation,userMiddleName,userPhoneNumber,userLinkedinUrl,userEduPg,userEduUg,userTimeZone,userVisaStatus,loginStatus,userLoginEmail,userRoleStatus,password,userRoleProgramBatchStatus,userComments,ProgramDescription,ProgramName,ProgramStatus,batchDescription,batchId,batchname,batchNoOfClasses,batchStatus,programId,programName,Comment,classNo,classDate,classTopic,classStatus,classStaffId,classDescription,classComments,classNotes,classRecordingPath,Response_Status_Code,expectedstatusline
+L_POST_TC_01,POST,Login,login,,,,,,,,,,,,,,,sdetorganizer@gmail.com,,March@2025,,,,,,,,,,,,,,,,,,,,,,,200,OK
+L_POST_TC_02,POST,Login,login,,,,,,,,,,,,,,,oscar.wriht@gmail.com,,8767jhk+As,,,,,,,,,,,,,,,,,,,,,,,400,Bad Request
+L_POST_TC_03,POST,Login,login,,,,,,,,,,,,,,,alice.bron@gmail.co,,Numpy123&,,,,,,,,,,,,,,,,,,,,,,,400,Bad Request
+L_POST_TC_04,POST,Login,login,,,,,,,,,,,,,,,sdetorganizer@gmail.com,,March@2025767000,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+U_POST_TC_01,POST,Create users with Role Id,users/roleStatus,U279,R01,Active,Alice,Brown,PA,Moore,=+1 7710558994,https://www.linkedin.com/feed/?Alic,BE,ME,EST,H1B,Active,alice.bron@gmail.com,Active,Numpy123,Active,ADMIN1,,,,,,,,,,,,,,,,,,,,,201,Created
+U_POST_TC_02,POST,Create users with Role Id,users/roleStatus,U280,R02,Active,Bob,Green,WA,Doe,=+1 7710558998,https://www.linkedin.com/feed/?BO,BSC,MSC,PST,H4-EAD,Active,bob.gren@gmail.com,Active,Numpy124,Active,STAFF1,,,,,,,,,,,,,,,,,,,,,201,Created
+U_POST_TC_03,POST,Create users with Role Id,users/roleStatus,U281,R03,Active,Oscar,Wright,TN,Miller,=+1 7710858998,https://www.linkedin.com/feed/?wright,BED,MED,CST,GC-EAD,Active,oscar.wriht@gmail.com,Active,Numpy125,Active,STUDENT1,,,,,,,,,,,,,,,,,,,,,201,Created
+U_POST_TC_04,POST,Create users with Role Id,users/roleStatus,U282,R01,Active,Eve,Anderson,LA,Doe,=+1 7710538998,https://www.linkedin.com/feed/?Eve,BSC,MSC,IST,H4,Active,eve.andeson@gmail.com,Active,Numpy126,Active,ADMIN1,,,,,,,,,,,,,,,,,,,,,201,Created
+U_GET_TC_05,GET,Get All users,users,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+U_GET_TC_06,GET,Get All users,users,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+U_GET_TC_07,GET,All active users,users/activeUsers,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+U_GET_TC_08,GET,All active users,users/activeUser,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+U_GET_TC_09,GET,Emails of all users with active status,fetch-emails,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+U_GET_TC_10,GET,All Roles,roles,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+U_GET_TC_11,GET,User information by UserId,users,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+U_GET_TC_12,GET,All Users with roles,users/roles,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+U_GET_TC_13,GET,count of active and inactive users,users/byStatus,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+U_GET_TC_14,GET,User by Program Batches,users/programBatch,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+U_GET_TC_15,GET,users for programId,users/programs,,,,,,,,,,,,,,,,,,,,,,,,,,,,16916,,,,,,,,,,,,200,OK
+U_GET_TC_16,GET,users for programId,users/programs/16970,,,,,,,,,,,,,,,,,,,,,,,,,,,,16970,,,,,,,,,,,,404,Not Found
+U_GET_TC_17,GET,users for programId,users/programs/16971,,,,,,,,,,,,,,,,,,,,,,,,,,,,16971,,,,,,,,,,,,404,Not Found
+U_GET_TC_18,GET,users for programId,users/programs/16916,,,,,,,,,,,,,,,,,,,,,,,,,,,,16916,,,,,,,,,,,,401,Unauthorized
+U_GET_TC_19,GET,users for roleId,users/roles/R01,,R01,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+U_GET_TC_20,GET,users for roleId,users/roles/R04,,R04,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+U_GET_TC_21,GET,users for roleId,users/roles/R01,,R01,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+U_GET_TC_22,GET,users for roleId V2,v2/users,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+U_GET_TC_23,GET,users for roleId V2,v2/users,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+U_PUT_TC_24,PUT,update user,users,,R03,Active,Oscar,Wright,CA,Miller,(+1) 7710858998,https://www.linkedin.com/feed/?wright,BED,MED,CST,GC-EAD,Active,oscar.wriht@gmail.com,Active,Numpy1@345,,,,,,,,,,,,,,,,,,,,,,,200,OK
+U_PUT_TC_25,PUT,update user,users/U282,,R01,Active,Oscar,Wright,CA,Miller,(+1) 7710858998,https://www.linkedin.com/feed/?wright,BED,MED,CST,GC-EAD,Active,oscar.wriht@gmail.com,Active,Numpy1@346,,,,,,,,,,,,,,,,,,,,,,,400,Bad Request
+U_PUT_TC_26,PUT,update user,users/U299,,R03,Active,Oscar,Wright,CA,Miller,(+1) 7710858998,https://www.linkedin.com/feed/?wright,BED,MED,CST,GC-EAD,Active,oscar.wriht@gmail.com,Active,Numpy1@347,,,,,,,,,,,,,,,,,,,,,,,400,Bad Request
+U_PUT_TC_27,PUT,update user roleId,users/roleId/U282,U282,R01,Active,Eve,Anderson,LA,Doe,(+1) 7710538998,https://www.linkedin.com/feed/?Eve,BSC,MSC,IST,H4,Active,eve.andeson@gmail.com,Active,Numpy1@348,,,,,,,,,,,,,,,,,,,,,,,400,Bad Request
+U_PUT_TC_28,PUT,update user roleId,users/roleId/U283,U283,R0278,Active,Eve,Anderson,LA,Doe,(+1) 7710538998,https://www.linkedin.com/feed/?Eve,BSC,MSC,IST,H5,Active,eve.andeson@gmail.com,Active,Numpy1@349,,,,,,,,,,,,,,,,,,,,,,,400,Bad Request
+U_PUT_TC_29,PUT,Update User ID and chained with program and Batch module,users/roleProgramBatchStatus,,R01,,,,,,,,,,,,,,,,Active,,,,,,,,,,,,,,,,,,,,,,200,OK
+U_PUT_TC_30,PUT,Update User Role Program Batch Status,users/roleProgramBatchStatus,U282,R01,,,,,,,,,,,,,,,,Active,,,,,,,,,,16916,,,,,,,,,,,,201,Created
+U_PUT_TC_31,PUT,Update User Login Status,users/userLogin,U279,R01,,,,,,,,,,,,inactive,alice.bron@gmail.com,,24534,,,,,,,,,,,,,,,,,,,,,,,201,Created
+U_DEL_TC_32,DELETE,Delete User,users/,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+P_POST_TC_01,POST,Add New Program,saveprogram,,,,,,,,,,,,,,,,,,,,Program added,Test-Program-Javanu,active,,,,,,,,StoreProgramID,,,,,,,,,,201,Created
+P_POST_TC_02,POST,Add New Program,saveprogram,,,,,,,,,,,,,,,,,,,,Program added,Test-Program-Pythonu,active,,,,,,,,StoreProgramName,,,,,,,,,,201,Created
+P_POST_TC_03,POST,Add New Program,saveprogram,,,,,,,,,,,,,,,,,,,,Program added,Test-Program-Seleniumu,active,,,,,,,,StoreProgramID,,,,,,,,,,201,Created
+P_POST_TC_04,POST,Add New Program with No auth,saveprogram,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+P_POST_TC_05,POST,Add New Program with invalid url,saveprogramm,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+P_POST_TC_06,POST,Add New Program with existing program name,saveprogram,,,,,,,,,,,,,,,,,,,,Program exists,Test-Program-Pythonu,active,,,,,,,,,,,,,,,,,,400,Bad Request
+P_GET_TC_07,GET,Get all programs,allPrograms,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+P_GET_TC_08,GET,Get all programs invalid endpoint,allProgramsss,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+P_GET_TC_09,GET,Get all programs with invalid method name,allPrograms,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
+P_GET_TC_10,GET,Get all programs with no Auth,allPrograms,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+P_GET_TC_11,GET,Get all programs with users,allProgramsWithUsers,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+P_GET_TC_12,GET,Get all programs with users Invalid endpoint,allProgramsWithUsersss,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+P_GET_TC_13,GET,Get all programs with users Invalid Method,allProgramsWithUsers,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
+P_GET_TC_14,GET,Get all programs with users No Auth,allProgramsWithUsers,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+P_GET_TC_15,GET,Get program by valid program ID,programs,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+P_GET_TC_16,GET,Get program by Invalid program ID,programs/99999999,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+P_GET_TC_17,GET,Get program with No Auth,programs,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+P_GET_TC_18,GET,Get Program by invalid Method name,programs,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
+P_PUT_TC_19,PUT,Update program by valid program name,program,,,,,,,,,,,,,,,,,,,,Program updated,Test-Program-Pythonuu,active,,,,,,,,StoreProgramName,,,,,,,,,,200,OK
+P_PUT_TC_20,PUT,Update program by invalid program name,program/asdfkljksihdfk,,,,,,,,,,,,,,,,,,,,,Test-Program-Pythonuu,active,,,,,,,,StoreProgramName,,,,,,,,,,404,Not Found
+P_PUT_TC_21,PUT,Update program with empty body,program,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+P_PUT_TC_22,PUT,Update program with no auth,program,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+P_PUT_TC_23,PUT,Update program by Program ID,putprogram,,,,,,,,,,,,,,,,,,,,,Test-Program-Seleniumss,Active,,,,,,,,,,,,,,,,,,200,OK
+P_PUT_TC_24,PUT,Update program by invalid endpoint,putprogram/99999999,,,,,,,,,,,,,,,,,,,,,Test-Program-Seleniumss,Active,,,,,,,,,,,,,,,,,,404,Not Found
+P_PUT_TC_25,PUT,Update program with empty body,putprogram,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+P_PUT_TC_26,PUT,Update program with no auth,putprogram,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+P_DEL_TC_27,DELETE,Delete program by Invalid program ID,deletebyprogid/9999999,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+P_DEL_TC_28,DELETE,Delete Program with no auth,deletebyprogid,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+P_DEL_TC_29,DELETE,Delete program with valid program ID,deletebyprogid,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+P_DEL_TC_30,DELETE,Delete program by Invalid program name,deletebyprogname/Agghtaslkfjasd,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+P_DEL_TC_31,DELETE,Delete Program with no auth,deletebyprogname/Test-Program-Pythonuu,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+P_DEL_TC_32,DELETE,Delete program with valid program name,deletebyprogname/Test-Program-Pythonuu,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+B_POST_TC_00,POST,Create batch ID and chained with program module,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,RequestRockStarsTeam027,9,Active,,,,,,,,,,,,,201,Created
+B_POST_TC_40,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing,,APITestingsJAVA32,4,Active,16916,,,,,,,,,,,,201,Created
+B_POST_TC_41,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing02,,APITestingsPython32,4,Active,16916,,,,,,,,,,,,201,Created
+B_POST_TC_42,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,2345,,APITestings03,4,Active,16916,,,,,,,,,,,,400,Bad Request
+B_POST_TC_43,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,#$@,,APITestings03,4,Active,16916,,,,,,,,,,,,400,Bad Request
+B_POST_TC_44,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,,,APITesting42,4,Active,16916,,,,,,,,,,,,201,Created
+B_POST_TC_45,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,243,4,Active,16916,,,,,,,,,,,,400,Bad Request
+B_POST_TC_46,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,#$%,4,Active,16916,,,,,,,,,,,,400,Bad Request
+B_POST_TC_47,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,,4,Active,16916,,,,,,,,,,,,400,Bad Request
+B_POST_TC_48,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting01,4,Active,16916,,,,,,,,,,,,400,Bad Request
+B_POST_TC_49,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,,Active,16916,,,,,,,,,,,,400,Bad Request
+B_POST_TC_50,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,df,Active,16916,,,,,,,,,,,,400,Bad Request
+B_POST_TC_51,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,$%,Active,16916,,,,,,,,,,,,400,Bad Request
+B_POST_TC_52,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,78,16916,,,,,,,,,,,,400,Bad Request
+B_POST_TC_53,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,DFR,16916,,,,,,,,,,,,400,Bad Request
+B_POST_TC_54,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,DF56,16916,,,,,,,,,,,,400,Bad Request
+B_POST_TC_55,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,$%,16916,,,,,,,,,,,,400,Bad Request
+B_POST_TC_56,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,,16916,,,,,,,,,,,,400,Bad Request
+B_POST_TC_57,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,Active,,,,,,,,,,,,,400,Bad Request
+B_POST_TC_58,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,Active,GHT,,,,,,,,,,,,400,Bad Request
+B_POST_TC_59,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,Active,&*,,,,,,,,,,,,400,Bad Request
+B_POST_TC_60,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,Active,-16916,,,,,,,,,,,,400,Bad Request
+B_POST_TC_61,POST,Create batch ID,batch,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,Active,16916,,,,,,,,,,,,404,Not Found
+B_POST_TC_62,POST,Create batch ID,,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,Active,16916,,,,,,,,,,,,404,Not Found
+B_POST_TC_63,GET,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting04,4,Active,16916,,,,,,,,,,,,405,Method Not Allowed
+B_POST_TC_64,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,APITesting08,4,Active,16916,,,,,,,,,,,,401,Unauthorized
+B_GET_TC_01,GET,Get All Batches,batches,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+B_GET_TC_02,GET,Get All Batches,batch,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+B_GET_TC_03,GET,Get All Batches,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+B_GET_TC_04,POST,Get All Batches,batches,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
+B_GET_TC_05,GET,Get All Batches,batches,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+B_GET_TC_08,GET,Get By Batch ID,batches/batchId/9829,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+B_GET_TC_09,GET,Get By Batch ID,batches/batchId/94,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+B_GET_TC_10,GET,Get By Batch ID,batches/batchId/,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+B_GET_TC_11,GET,Get By Batch ID,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+B_GET_TC_12,POST,Get By Batch ID,batches/batchId/9829,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
+B_GET_TC_13,GET,Get By Batch ID,batches/batchId/9829,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+B_GET_TC_16,GET,Get Bt Batch Name,batches/batchName/Javacourse,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+B_GET_TC_17,GET,Get Bt Batch Name,batches/batchName/Java,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+B_GET_TC_18,GET,Get Bt Batch Name,batches/batchName/,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+B_GET_TC_19,GET,Get Bt Batch Name,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+B_GET_TC_20,POST,Get Bt Batch Name,batches/batchName/Javacourse,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
+B_GET_TC_21,GET,Get Bt Batch Name,batches/batchName/Javacourse,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+B_GET_TC_24,GET,Get By Program ID,batches/program/16916,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+B_GET_TC_25,GET,Get By Program ID,batches/program/16,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+B_GET_TC_26,GET,Get By Program ID,batches/program/,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+B_GET_TC_27,GET,Get By Program ID,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+B_GET_TC_28,DELETE,Get By Program ID,batches/program/16916,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
+B_GET_TC_29,GET,Get By Program ID,batches/program/16916,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+B_PUT_TC_67,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacoursejava23,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,200,OK
+B_PUT_TC_68,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,,,Javacoursetester24,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,200,OK
+B_PUT_TC_69,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,675,,Javacourse7,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_70,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,&%$,,Javacourse7,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_71,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,,,JavacourseTesting13,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,200,OK
+B_PUT_TC_72,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,453,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_73,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,#$%,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_74,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_75,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse11,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_76,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_77,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,TH,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_78,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,&^,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_79,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,6,678,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_80,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,6,DFT,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_81,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,6,DR45,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_82,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,6,^%$,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_83,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,6,,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_84,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,6,Active,,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_85,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,6,Active,ght,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_86,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,6,Active,&^%,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_87,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,6,Active,-16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
+B_PUT_TC_88,PUT,Update Batch,batches/batchId,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse26,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,404,Not Found
+B_PUT_TC_89,PUT,Update Batch,,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,404,Not Found
+B_PUT_TC_90,POST,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,405,Method Not Allowed
+B_PUT_TC_91,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse12,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,401,Unauthorized
+B_DEL_TC_32,DELETE,Delete Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+B_DEL_TC_33,DELETE,Delete Batch,batches/9494,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+B_DEL_TC_34,DELETE,Delete Batch,batches/bachId/,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+B_DEL_TC_35,DELETE,Delete Batch,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+B_DEL_TC_36,POST,Delete Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
+B_DEL_TC_37,DELETE,Delete Batch,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+B_DEL_TC_38,DELETE,Delete Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+C_POST_TC_A_1,POST,Create classes for chain with user,CreateClassSchedule,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,SoftSkills17,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,201,Created
+C_POST_TC_01,POST,Create classes,CreateClassSchedule,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,SoftSkills20,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,201,Created
+C_POST_TC_02,POST,Create classes without Authorization,CreateClassSchedule,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Looker0,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,401,Unauthorized
+C_POST_TC_03,POST,Create classes with invalid endpoint,InvalidEndpoint,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Tableau,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,404,Not Found
+C_POST_TC_04,POST,Create classes with duplicate ClassTopic,CreateClassSchedule,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,SQL,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,400,Bad Request
+C_POST_TC_05,POST,Create classes with missing mandatory fields,CreateClassSchedule,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,2025-03-26T19:04:41.220Z,,Scheduled,U25,,,,check biology folder,400,Bad Request
+C_GET_TC_06,GET,Get all classes,allClasses,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+C_GET_TC_07,GET,Get all classes with invalid endpoint,InvalidEndpoint,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
+C_GET_TC_08,GET,Get all classes with invalid method,allClasses,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
+C_GET_TC_09,GET,Get all classes without Authorization,allClasses,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+C_GET_TC_10,GET,Get class by valid Class ID,class,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,200,OK
+C_GET_TC_11,GET,Get class by invalid Class ID,class/1223,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,404,Not Found
+C_GET_TC_12,GET,Get class without Authorization,class,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,401,Unauthorized
+C_GET_TC_13,GET,Get classes by valid Batch ID,classesbyBatch/9499,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,200,OK
+C_GET_TC_14,GET,Get classes by invalid Batch ID,classesbyBatch/9492,,,,,,,,,,,,,,,,,,,,,,,,9999,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,404,Not Found
+C_GET_TC_15,GET,Get classes by valid Staff ID,classesByStaff/U25,,,,,,,,,,,,,,,,,,,,,,,,9999,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,200,OK
+C_GET_TC_16,GET,Get classes by invalid Staff ID,classesByStaff/U278,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U99,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,404,Not Found
+C_GET_TC_17,GET,Get class recordings by valid Class ID,classRecordings/829,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,200,OK
+C_GET_TC_18,GET,Get class recordings by invalid Class ID,classRecordings/55,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,404,Not Found
+C_PUT_TC_19,PUT,Update class with valid Class ID,updateClass/829,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,200,OK
+C_PUT_TC_20,PUT,Update class with invalid Class ID,updateClass/16,,,,,,,,,,,,,,,,,,,,,,,,9999,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,404,Not Found
+C_PUT_TC_21,PUT,Update class without Authorization,updateClass/829,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,401,Unauthorized
+C_PUT_TC_22,PUT,Update class recording path with valid Class ID,updateClassrecording/{classId},,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,200,OK
+C_PUT_TC_23,PUT,Update class recording path with invalid Class ID,updateClassrecording/{classId},,,,,,,,,,,,,,,,,,,,,,,,9999,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,404,Not Found
+C_DEL_TC_24,DELETE,Delete class with valid Class ID,deleteByClass/,829,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,200,OK
+C_DEL_TC_25,DELETE,Delete class with invalid Class ID,deleteByClass/{classId},,,,,,,,,,,,,,,,,,,,,,,,9999,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,404,Not Found
+C_DEL_TC_26,DELETE,Delete class without Authorization,deleteByClass/{classId},,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,401,Unauthorized
+C_DEL_TC_27,GET,Get classes by valid Class Topic,classes/Botany,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,200,OK
+C_DEL_TC_28,GET,Get classes by invalid Class Topic,classes/nothing,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,InvalidTopic,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,404,Not Found
