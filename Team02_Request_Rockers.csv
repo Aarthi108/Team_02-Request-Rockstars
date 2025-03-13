@@ -34,13 +34,13 @@ U_PUT_TC_28,PUT,update user roleId,users/roleId/U283,U283,R0278,Active,Eve,Ander
 U_PUT_TC_29,PUT,Update User ID and chained with program and Batch module,users/roleProgramBatchStatus,,R01,,,,,,,,,,,,,,,,Active,,,,,,,,,,,,,,,,,,,,,,200,OK
 U_PUT_TC_30,PUT,Update User Role Program Batch Status,users/roleProgramBatchStatus,U282,R01,,,,,,,,,,,,,,,,Active,,,,,,,,,,16916,,,,,,,,,,,,201,Created
 U_PUT_TC_31,PUT,Update User Login Status,users/userLogin,U279,R01,,,,,,,,,,,,inactive,alice.bron@gmail.com,,24534,,,,,,,,,,,,,,,,,,,,,,,201,Created
-U_DEL_TC_32,DELETE,Delete User,users/,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-P_POST_TC_01,POST,Add New Program,saveprogram,,,,,,,,,,,,,,,,,,,,Program added,Test-Program-Javanu,active,,,,,,,,StoreProgramID,,,,,,,,,,201,Created
-P_POST_TC_02,POST,Add New Program,saveprogram,,,,,,,,,,,,,,,,,,,,Program added,Test-Program-Pythonu,active,,,,,,,,StoreProgramName,,,,,,,,,,201,Created
-P_POST_TC_03,POST,Add New Program,saveprogram,,,,,,,,,,,,,,,,,,,,Program added,Test-Program-Seleniumu,active,,,,,,,,StoreProgramID,,,,,,,,,,201,Created
+U_DEL_TC_32,DELETE,Delete User,users,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+P_POST_TC_01,POST,Add New Program,saveprogram,,,,,,,,,,,,,,,,,,,,Program added,Test-Program-Javauv,active,,,,,,,,StoreProgramID,,,,,,,,,,201,Created
+P_POST_TC_02,POST,Add New Program,saveprogram,,,,,,,,,,,,,,,,,,,,Program added,Test-Program-Pythouv,active,,,,,,,,StoreProgramName,,,,,,,,,,201,Created
+P_POST_TC_03,POST,Add New Program,saveprogram,,,,,,,,,,,,,,,,,,,,Program added,Test-Program-Seleniumuv,active,,,,,,,,StoreProgramID,,,,,,,,,,201,Created
 P_POST_TC_04,POST,Add New Program with No auth,saveprogram,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
 P_POST_TC_05,POST,Add New Program with invalid url,saveprogramm,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-P_POST_TC_06,POST,Add New Program with existing program name,saveprogram,,,,,,,,,,,,,,,,,,,,Program exists,Test-Program-Pythonu,active,,,,,,,,,,,,,,,,,,400,Bad Request
+P_POST_TC_06,POST,Add New Program with existing program name,saveprogram,,,,,,,,,,,,,,,,,,,,Program exists,Test-Program-Pythonuv,active,,,,,,,,,,,,,,,,,,400,Bad Request
 P_GET_TC_07,GET,Get all programs,allPrograms,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
 P_GET_TC_08,GET,Get all programs invalid endpoint,allProgramsss,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
 P_GET_TC_09,GET,Get all programs with invalid method name,allPrograms,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
@@ -53,26 +53,26 @@ P_GET_TC_15,GET,Get program by valid program ID,programs,,,,,,,,,,,,,,,,,,,,,,,,
 P_GET_TC_16,GET,Get program by Invalid program ID,programs/99999999,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
 P_GET_TC_17,GET,Get program with No Auth,programs,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
 P_GET_TC_18,GET,Get Program by invalid Method name,programs,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
-P_PUT_TC_19,PUT,Update program by valid program name,program,,,,,,,,,,,,,,,,,,,,Program updated,Test-Program-Pythonuu,active,,,,,,,,StoreProgramName,,,,,,,,,,200,OK
-P_PUT_TC_20,PUT,Update program by invalid program name,program/asdfkljksihdfk,,,,,,,,,,,,,,,,,,,,,Test-Program-Pythonuu,active,,,,,,,,StoreProgramName,,,,,,,,,,404,Not Found
+P_PUT_TC_19,PUT,Update program by valid program name,program,,,,,,,,,,,,,,,,,,,,Program updated,Test-Program-Pythonuv,active,,,,,,,,StoreProgramName,,,,,,,,,,200,OK
+P_PUT_TC_20,PUT,Update program by invalid program name,program/asdfkljksihdfk,,,,,,,,,,,,,,,,,,,,,Test-Program-Pythonuv,active,,,,,,,,StoreProgramName,,,,,,,,,,404,Not Found
 P_PUT_TC_21,PUT,Update program with empty body,program,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
 P_PUT_TC_22,PUT,Update program with no auth,program,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-P_PUT_TC_23,PUT,Update program by Program ID,putprogram,,,,,,,,,,,,,,,,,,,,,Test-Program-Seleniumss,Active,,,,,,,,,,,,,,,,,,200,OK
-P_PUT_TC_24,PUT,Update program by invalid endpoint,putprogram/99999999,,,,,,,,,,,,,,,,,,,,,Test-Program-Seleniumss,Active,,,,,,,,,,,,,,,,,,404,Not Found
+P_PUT_TC_23,PUT,Update program by Program ID,putprogram,,,,,,,,,,,,,,,,,,,,,Test-Program-Seleniumuv,Active,,,,,,,,,,,,,,,,,,200,OK
+P_PUT_TC_24,PUT,Update program by invalid endpoint,putprogram/99999999,,,,,,,,,,,,,,,,,,,,,Test-Program-Seleniumuv,Active,,,,,,,,,,,,,,,,,,404,Not Found
 P_PUT_TC_25,PUT,Update program with empty body,putprogram,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
 P_PUT_TC_26,PUT,Update program with no auth,putprogram,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
 P_DEL_TC_27,DELETE,Delete program by Invalid program ID,deletebyprogid/9999999,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
 P_DEL_TC_28,DELETE,Delete Program with no auth,deletebyprogid,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
 P_DEL_TC_29,DELETE,Delete program with valid program ID,deletebyprogid,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
 P_DEL_TC_30,DELETE,Delete program by Invalid program name,deletebyprogname/Agghtaslkfjasd,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
-P_DEL_TC_31,DELETE,Delete Program with no auth,deletebyprogname/Test-Program-Pythonuu,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-P_DEL_TC_32,DELETE,Delete program with valid program name,deletebyprogname/Test-Program-Pythonuu,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
-B_POST_TC_00,POST,Create batch ID and chained with program module,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,RequestRockStarsTeam027,9,Active,,,,,,,,,,,,,201,Created
-B_POST_TC_40,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing,,APITestingsJAVA32,4,Active,16916,,,,,,,,,,,,201,Created
-B_POST_TC_41,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing02,,APITestingsPython32,4,Active,16916,,,,,,,,,,,,201,Created
+P_DEL_TC_31,DELETE,Delete Program with no auth,deletebyprogname/Test-Program-Pythonuv,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
+P_DEL_TC_32,DELETE,Delete program with valid program name,deletebyprogname/Test-Program-Pythonuv,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,200,OK
+B_POST_TC_00,POST,Create batch ID and chained with program module,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,RequestRockStarsTeam028,9,Active,,,,,,,,,,,,,201,Created
+B_POST_TC_40,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing,,APITestingsJAVA33,4,Active,16916,,,,,,,,,,,,201,Created
+B_POST_TC_41,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing02,,APITestingsPython33,4,Active,16916,,,,,,,,,,,,201,Created
 B_POST_TC_42,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,2345,,APITestings03,4,Active,16916,,,,,,,,,,,,400,Bad Request
 B_POST_TC_43,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,#$@,,APITestings03,4,Active,16916,,,,,,,,,,,,400,Bad Request
-B_POST_TC_44,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,,,APITesting42,4,Active,16916,,,,,,,,,,,,201,Created
+B_POST_TC_44,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,,,APITesting43,4,Active,16916,,,,,,,,,,,,201,Created
 B_POST_TC_45,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,243,4,Active,16916,,,,,,,,,,,,400,Bad Request
 B_POST_TC_46,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,#$%,4,Active,16916,,,,,,,,,,,,400,Bad Request
 B_POST_TC_47,POST,Create batch ID,batches,,,,,,,,,,,,,,,,,,,,,,,LMS API Testing03,,,4,Active,16916,,,,,,,,,,,,400,Bad Request
@@ -116,11 +116,11 @@ B_GET_TC_26,GET,Get By Program ID,batches/program/,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 B_GET_TC_27,GET,Get By Program ID,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,404,Not Found
 B_GET_TC_28,DELETE,Get By Program ID,batches/program/16916,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,405,Method Not Allowed
 B_GET_TC_29,GET,Get By Program ID,batches/program/16916,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,401,Unauthorized
-B_PUT_TC_67,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacoursejava23,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,200,OK
-B_PUT_TC_68,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,,,Javacoursetester24,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,200,OK
+B_PUT_TC_67,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacoursejava24,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,200,OK
+B_PUT_TC_68,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,,,Javacoursetester25,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,200,OK
 B_PUT_TC_69,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,675,,Javacourse7,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
 B_PUT_TC_70,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,&%$,,Javacourse7,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
-B_PUT_TC_71,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,,,JavacourseTesting13,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,200,OK
+B_PUT_TC_71,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,,,JavacourseTesting14,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,200,OK
 B_PUT_TC_72,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,453,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
 B_PUT_TC_73,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,#$%,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
 B_PUT_TC_74,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
@@ -137,7 +137,7 @@ B_PUT_TC_84,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,
 B_PUT_TC_85,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,6,Active,ght,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
 B_PUT_TC_86,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,6,Active,&^%,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
 B_PUT_TC_87,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,6,Active,-16916,APINinjashnoqdqwyne,,,,,,,,,,,400,Bad Request
-B_PUT_TC_88,PUT,Update Batch,batches/batchId,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse26,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,404,Not Found
+B_PUT_TC_88,PUT,Update Batch,batches/batchId,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse27,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,404,Not Found
 B_PUT_TC_89,PUT,Update Batch,,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,404,Not Found
 B_PUT_TC_90,POST,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse7,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,405,Method Not Allowed
 B_PUT_TC_91,PUT,Update Batch,batches/,,,,,,,,,,,,,,,,,,,,,,,JavaTeachingCourse,,Javacourse12,5,Active,16916,APINinjashnoqdqwyne,,,,,,,,,,,401,Unauthorized
@@ -172,7 +172,7 @@ C_PUT_TC_20,PUT,Update class with invalid Class ID,updateClass/16,,,,,,,,,,,,,,,
 C_PUT_TC_21,PUT,Update class without Authorization,updateClass/829,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,401,Unauthorized
 C_PUT_TC_22,PUT,Update class recording path with valid Class ID,updateClassrecording/{classId},,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,200,OK
 C_PUT_TC_23,PUT,Update class recording path with invalid Class ID,updateClassrecording/{classId},,,,,,,,,,,,,,,,,,,,,,,,9999,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,404,Not Found
-C_DEL_TC_24,DELETE,Delete class with valid Class ID,deleteByClass/,829,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,200,OK
+C_DEL_TC_24,DELETE,Delete class with valid Class ID,deleteByClass/829,829,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,200,OK
 C_DEL_TC_25,DELETE,Delete class with invalid Class ID,deleteByClass/{classId},,,,,,,,,,,,,,,,,,,,,,,,9999,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,404,Not Found
 C_DEL_TC_26,DELETE,Delete class without Authorization,deleteByClass/{classId},,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,401,Unauthorized
 C_DEL_TC_27,GET,Get classes by valid Class Topic,classes/Botany,,,,,,,,,,,,,,,,,,,,,,,,9499,,,,,,,1,2025-03-26T19:04:41.220Z,Botany,Scheduled,U25,Botany Introduction,Bring Notepad,Bring Questions to class,check biology folder,200,OK
